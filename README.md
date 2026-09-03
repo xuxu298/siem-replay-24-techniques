@@ -6,6 +6,20 @@ default-configured Wazuh build, which ones made a rule fire, and which ones did 
 The whole quiet chain — discovery, collection, exfiltration, command-and-control — produced
 nothing at all.
 
+## Correction — 3 September 2026
+
+A Wazuh engineer read this file, asked for the version, the OS, the agent configuration and the exact command behind each of the 24 techniques, and we could not hand any of them over. Two statements below are wrong because of that, and the silent count needs narrowing.
+
+**"The method above is complete enough to do that" is not true.** No Wazuh version, no agent configuration and no per-technique command or path is published anywhere in this repository. Until they are, 3-of-24 cannot be reproduced from this file by anyone outside our company. Read it as our claim, not as a result you can check.
+
+**Three of the 21 silent techniques are an artefact of our observation window, not a finding about the build.** cron (T1053.003), sudoers (T1548.003) and permission change (T1222.002) are reported by file integrity monitoring, which on a default build runs as a scheduled scan rather than in real time. The 15-25 second query window below is shorter than that scan interval, so those three could not have alerted inside it whatever the ruleset said.
+
+**Two more rows we got wrong in the other direction.** SSH keys (T1098.004) is not a window problem at all: `~/.ssh/authorized_keys` is outside the default monitored scope, so nothing was watching it. And file deletion (T1070.004) may belong with the first three — it depends on whether the deleted file sat in a default-monitored path, and we did not record which path we used. That is the same failure as the paragraph above, showing up as a row we can no longer classify.
+
+**So the split is three states, not two.** No telemetry collected; telemetry collected and no rule matched; a detection that exists and did not fire inside the window we looked in. This file separated the first two and folded the third into the second.
+
+The alerted count is unchanged. What changes is what the silent count is allowed to be used for: it is 21 observed silences, not 21 missing rules, and at least three of them are our measurement rather than the build.
+
 ## Why this is not a coverage number
 
 Most coverage claims mean one thing: "we have a rule for technique X." That is a statement about
@@ -173,6 +187,9 @@ argue with your data than with our own.
 Run the same techniques against your own build and see whether you get a different answer. The
 method above is complete enough to do that. A measurement that cannot come out badly is not a
 measurement.
+
+That second sentence is wrong, and we have left it standing rather than edited it away: see
+[Correction — 3 September 2026](#correction--3-september-2026) at the top of this file.
 
 **Corrections wanted.** If you think the 3/24 is wrong, tell us which technique should have fired
 and on what rule. We will re-run it and publish the correction with the same prominence as the

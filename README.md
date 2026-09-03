@@ -127,13 +127,18 @@ can fail is not a benchmark. That negative control is what makes the other rows 
 third host, `dbsrv02`, carried events timestamped 4s late and returned MTTD 4s, so the clock is
 measuring something real rather than returning zero by construction.
 
-## Two more numbers from the same lab
+## Two more findings from the same lab — and two things withheld
 
-- Real ransomware encrypting real files → caught by Wazuh FIM realtime, rule `100486`. We are not
-  quoting a detection time for this one: the figure in our internal notes does not appear in the
-  published report it would have to come from, so it does not go in front of you.
-- SSH brute force → alert **and an actual firewall drop** that reached the host and stayed there
-  (rules `100120` / `100900`).
+- Real ransomware encrypting real files → caught by Wazuh file integrity monitoring in real-time
+  mode. Two things are withheld here on purpose: the detection time, because the figure in our
+  internal notes does not appear in any published report we can point you at, and the rule id, on
+  the same ground.
+- SSH brute force → alert **and an actual firewall drop** that reached the host and stayed there.
+  The rule ids for that one are withheld on the same ground.
+
+We had both sets of ids written down and we have taken them back out. An id you cannot trace to a
+source file is a claim nobody can check, which is worse than no id at all. If we find the file, we
+will put them back and say so here.
 
 ## Dates, because they matter
 

@@ -194,3 +194,10 @@ That second sentence is wrong, and we have left it standing rather than edited i
 **Corrections wanted.** If you think the 3/24 is wrong, tell us which technique should have fired
 and on what rule. We will re-run it and publish the correction with the same prominence as the
 original claim.
+
+## Who ran this
+
+This replay was run by ATK, a security company that measures detection coverage and post-quantum readiness. Two other measurement records from the same team, both with raw data published:
+
+- [PQReadinessIndex](https://github.com/xuxu298/PQReadinessIndex) — post-quantum front-door support across 350 hosts, three runs (April, May, September 2026), including the hosts that went backwards.
+- [crowdsec-appsec-rdns-latency](https://github.com/xuxu298/crowdsec-appsec-rdns-latency) — in-band AppSec latency, a number we could not find published anywhere else.

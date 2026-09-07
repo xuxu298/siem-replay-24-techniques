@@ -26,6 +26,12 @@ only if it "produced an alert a human would actually see", and in Wazuh that phr
 a level that was never stated. It is written up in full below, after the tables:
 [Correction 2 — 7 September 2026](#correction-2--7-september-2026).
 
+**Correction 3 — 7 September 2026.** Three statements from the 4.14.7 re-run follow-up need
+correcting, and two of them we found by re-reading our own machine rather than being caught on
+them. The configured alert threshold also has a number now, where we previously said we would
+not give one. It is written up in full below, after the tables:
+[Correction 3 — 7 September 2026](#correction-3--7-september-2026).
+
 ## Why this is not a coverage number
 
 Most coverage claims mean one thing: "we have a rule for technique X." That is a statement about
@@ -124,6 +130,75 @@ as seen. No date is promised here.
 
 The original sentences are left standing, here and in the announcement post. This block is
 the correction, and the finding is Francisco Sousa's.
+
+## Correction 3 — 7 September 2026
+
+On 7 September we posted a follow-up to the Wazuh mailing list reporting a re-run of four
+techniques on stock Wazuh 4.14.7 against a real endpoint. Three statements in that thread are
+wrong or incomplete, and one number we declined to give can now be given.
+
+Two of the three were not caught by a reader. We found them by going back to the machine and
+reading it again. As with the corrections above, the original sentences are left standing
+rather than edited away.
+
+**The observation window was anchored to the wrong machine.** Our record put the start of the
+run, T0, at `2026-09-05T04:47:38Z`. That timestamp does not belong to the endpoint. The first
+alert from that endpoint is `2026-09-05T07:32:46Z`, and its `ossec.conf` was written at
+`07:27:22Z`. At `04:47:38Z` the endpoint did not yet exist.
+
+`04:47:38Z` is the start of a separate container run. The window we described as "the first few
+minutes after T0" was therefore published as beginning 2 hours 45 minutes earlier than the
+window we actually observed. Any count reported as "after T0" inherits that anchor. We are not
+restating those counts here until they are recomputed against the endpoint's own start.
+
+**"4.14.7 on both manager and agent" does not describe the machine the re-run ran on.** On that
+host the `wazuh-agent` package reports `un <none>`. It was never installed. What is installed is
+`wazuh-manager 4.14.7-1`, monitoring its own host through agent `000`.
+
+The follow-up post itself states this correctly. The sentence quoted above, written in the same
+thread, does not, and anyone matching versions against ours would have been looking for a second
+component that is not on the machine.
+
+**The 12-hour scan cadence does not explain the two silent file-integrity rows.** We wrote that
+for the FIM-sourced techniques a missing alert was "an arithmetic consequence of the 12h scan
+cadence, not an independent finding". Read plainly: wait for the next scan and it would surface.
+
+A scheduled scan did complete on that host at `2026-09-05T19:33:21Z`, consistent with the
+`<frequency>43200</frequency>` we published. Across the 422 alerts recorded that day, none
+carried a path under `cron`, `/tmp/`, `/dev/shm` or `/home`. The cycle ran and those paths stayed
+silent, so cadence does not carry the explanation we asked it to carry.
+
+That leaves two candidates, cadence and monitored scope, and our record cannot separate them,
+because we did not record the absolute path of the files we touched. That is the same omission
+Matías Exequiel García asked us to close for the chmod row, and it is why we are naming no cause
+here. The stock monitored set does not include `/var/spool/cron/crontabs/` or `/tmp`, which would
+fit, but fitting is not measuring and we are not going to publish it as a finding.
+
+The same cadence explanation appears in Correction, 3 September 2026 above, for the original June
+run. That was a different build on a different host, and this measurement does not settle it
+either way.
+
+**The visibility threshold now has a number. `log_alert_level` was 3.** We previously said we had
+not recorded it and would not put a number on it after the fact, and offered only a ceiling of
+"at or below 5". The ceiling was right. The value is 3, and it comes from the machine rather than
+from memory.
+
+Two things make it a reading of the run and not a reading of today. `ossec.conf` on that host was
+last written at `07:27:22Z`, five minutes before the endpoint's first alert, and was not modified
+afterwards, so the file describes the run. Independently of the config, the lowest-level alert
+present in that day's archive is level 3, on rule 5502.
+
+**What this cost us, stated plainly.** The reason we cannot close the FIM question is not that
+the measurement is hard. It is that a field we did not write down is the field that decides
+between a product that is quiet because it was not looking there, and a product that is quiet
+because it had not looked yet. A gap in the record does not only weaken the claim it sits in. It
+removes our ability to diagnose ourselves later.
+
+The finding that opened this line of correction is Matías Exequiel García's, and the reading of
+alert levels that made the threshold checkable is Francisco Sousa's. The two errors above that
+neither of them raised are ours, found by re-reading the machine. We are recording that
+distinction because the two corrections above this one both came from outside, and a record that
+only ever corrects what it is caught on is not much of a record.
 
 ## Three uncomfortable truths
 

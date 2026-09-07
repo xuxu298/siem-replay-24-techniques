@@ -20,6 +20,12 @@ A Wazuh engineer read this file, asked for the version, the OS, the agent config
 
 The alerted count is unchanged. What changes is what the silent count is allowed to be used for: it is 21 observed silences, not 21 missing rules, and at least three of them are our measurement rather than the build.
 
+**Correction 2 — 7 September 2026.** Francisco Sousa, on the Wazuh mailing list, found a
+second missing definition: the post announcing this file counted a technique as detected
+only if it "produced an alert a human would actually see", and in Wazuh that phrase names
+a level that was never stated. It is written up in full below, after the tables:
+[Correction 2 — 7 September 2026](#correction-2--7-september-2026).
+
 ## Why this is not a coverage number
 
 Most coverage claims mean one thing: "we have a rule for technique X." That is a statement about
@@ -70,6 +76,54 @@ the finding: the build detects noise well.
 Read the middle of that list again. Discovery, collection, exfiltration and C2 form a complete
 chain — land, look around, gather, take it out, keep talking to it. On this build that chain runs
 from end to end and the alert console stays empty.
+
+## Correction 2 — 7 September 2026
+
+Francisco Sousa, writing on the Wazuh mailing list, found a definition missing from the
+claim this file supports, and it is the one that decides the result. In his words:
+
+> The other thing that decides the result is the phrase "an alert a human would actually
+> see". In Wazuh that is a level, and it has to be stated. 5503 is level 5, the correlation
+> rules are level 10, and the default email threshold is 12. [...] Same events, different
+> answer, depending on a number that is not in the write-up.
+
+The passage we elided is where he sets out the two readings, and in his account they land
+in different places: on a stock install no brute-force rule reaches the default mail
+threshold, while level 10 is reachable for anyone watching the alert console instead.
+
+He is right. The phrase names a level, and no level was ever stated.
+
+**Where that phrase is, and where it is not.** It is not in this file. It is in the post
+that announced this file to the Wazuh mailing list, which said a technique counted as
+detected only if it "produced an alert a human would actually see". This file says
+something different — "when technique X actually ran, did a rule fire?" — and sends readers
+to the announcement, and the announcement sends readers here. One number, two criteria, and
+only one of them is checkable. They should never have differed.
+
+**What the criterion actually was.** In the run behind this file, a technique was recorded
+as ALERTED when a rule fired and the alert was present in `alerts.json`, at any level. That
+is the definition the tables above use. It is why T1110.001 appears in the alerted rows on
+the strength of default rule 5503, which is level 5.
+
+**What we cannot say.** Per-alert levels were not recorded during the run. Whether those
+same events would have cleared level 10, or the default mail threshold of 12, cannot be
+reconstructed from what we kept. We are not putting a number on it.
+
+**On the brute-force correlation.** He also sets out why 20+ failed SSH logins can end at
+5503 without the built-in correlation firing: 5551 wants eight matches inside 180 seconds
+from the same source, and the sshd-side equivalents 5712, 5763 and 5720 carry thresholds of
+their own. Attempts spaced wide enough never accumulate; a rotating source is never grouped.
+We have not re-checked those rule numbers against the 4.14.7 ruleset ourselves, so they are
+carried here as his reading and not as our measurement. Our record holds neither the interval
+between attempts nor the source addresses, so it cannot tell his two mechanisms apart. That
+is a gap in the record, and it is the substance of his point.
+
+**The re-run will carry his four points:** T1110.001 in the set, the interval between
+attempts and whether the source changed, the raw sshd and PAM lines, and the level counted
+as seen. No date is promised here.
+
+The original sentences are left standing, here and in the announcement post. This block is
+the correction, and the finding is Francisco Sousa's.
 
 ## Three uncomfortable truths
 

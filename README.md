@@ -133,9 +133,11 @@ the correction, and the finding is Francisco Sousa's.
 
 ## Correction 3 — 7 September 2026
 
-On 7 September we posted a follow-up to the Wazuh mailing list reporting a re-run of four
-techniques on stock Wazuh 4.14.7 against a real endpoint. Three statements in that thread are
-wrong or incomplete, and one number we declined to give can now be given.
+At `2026-09-06T21:16:06Z` we posted a follow-up to the Wazuh mailing list reporting a re-run of
+four techniques on stock Wazuh 4.14.7 against a real endpoint. Three statements in that thread
+are wrong or incomplete, and one number we declined to give can now be given. Times in this
+block are UTC, because the mailing list and this file each render dates in the reader's own
+zone, and one of the errors below is a timestamp taken from the wrong place.
 
 Two of the three were not caught by a reader. We found them by going back to the machine and
 reading it again. As with the corrections above, the original sentences are left standing

@@ -6,6 +6,8 @@ default-configured Wazuh build, which ones made a rule fire, and which ones did 
 The whole quiet chain — discovery, collection, exfiltration, command-and-control — produced
 nothing at all.
 
+A separate measurement from the same lab, on log sources the shipped ruleset has no rule for at all, is in [ot-k8s-rule-layer-2026-09-15.md](./ot-k8s-rule-layer-2026-09-15.md).
+
 ## Correction — 3 September 2026
 
 A Wazuh engineer read this file, asked for the version, the OS, the agent configuration and the exact command behind each of the 24 techniques, and we could not hand any of them over. Two statements below are wrong because of that, and the silent count needs narrowing.

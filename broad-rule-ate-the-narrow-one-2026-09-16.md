@@ -8,6 +8,8 @@ at the severity of a routine lookup.
 This is a short write-up of a mistake in our own rules, because the shape of it is
 reusable and it is not specific to our stack.
 
+Two related measurements in this repository: [ot-k8s-rule-layer-2026-09-15.md](ot-k8s-rule-layer-2026-09-15.md), the coverage zeros measured before any of these rules existed, and [two-zeros-different-causes-2026-09-16.md](two-zeros-different-causes-2026-09-16.md), what loading the rules then showed about those zeros.
+
 ## The two rules
 
 Against the Kubernetes API audit log we wrote:

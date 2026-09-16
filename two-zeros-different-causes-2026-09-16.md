@@ -83,4 +83,4 @@ is not how many rules you have. It is: **when your coverage says zero, which of 
 two zeros is it?** One of them a rule author can close. The other one cannot.
 
 If you have run this and got a different result, particularly on a GA build, the
-identifier and the tool output would be useful to us.
+identifier and the tool output would be useful to us. Send it: [open an issue](https://github.com/xuxu298/siem-replay-24-techniques/issues) or email dongnx.biz@gmail.com.

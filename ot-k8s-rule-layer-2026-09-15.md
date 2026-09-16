@@ -48,6 +48,8 @@ The replay in this repository measured techniques that the shipped ruleset does 
 
 Rules for these two classes are next. The zero got published first because once the rules exist it can't be measured on this rig again.
 
+Those rules now exist, and loading them showed the two zeros do not have the same cause: [two-zeros-different-causes-2026-09-16.md](two-zeros-different-causes-2026-09-16.md).
+
 ## Correction, 16 September 2026
 
 Two things in the first version of this page were wrong, corrected here rather than removed.

@@ -328,6 +328,8 @@ That second sentence is wrong, and we have left it standing rather than edited i
 and on what rule. We will re-run it and publish the correction with the same prominence as the
 original claim.
 
+If you have replayed these techniques on your own stack, send the numbers: [open an issue](https://github.com/xuxu298/siem-replay-24-techniques/issues) or email dongnx.biz@gmail.com.
+
 ## Who ran this
 
 This replay was run by ATK, a security company that measures detection coverage and post-quantum readiness. Two other measurement records from the same team, both with raw data published:

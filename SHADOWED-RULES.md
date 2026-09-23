@@ -103,7 +103,10 @@ scorer that returns `0` on the real ruleset returns `1` on rules built to be cau
 
 ## Reproduce
 
-The test is fully specified above, so this needs no code from me to check:
+`tools/shadow-check.js` in this repo is the exact script, pinned to the same commit. It prints
+every count shown here and refuses to report a number if a control fails.
+
+It is also fully specified in words, so it can be checked without running my code at all:
 
 1. Read the file list for that commit from the repository host's tree API. Keep
    `ruleset/rules/*.xml`. Expect 168 entries and `truncated: false`. If it says `true`, stop:

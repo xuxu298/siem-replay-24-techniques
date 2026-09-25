@@ -336,3 +336,5 @@ This replay was run by ATK, a security company that measures detection coverage 
 
 - [PQReadinessIndex](https://github.com/xuxu298/PQReadinessIndex) — post-quantum front-door support across 350 hosts, three runs (April, May, September 2026), including the hosts that went backwards.
 - [crowdsec-appsec-rdns-latency](https://github.com/xuxu298/crowdsec-appsec-rdns-latency) — in-band AppSec latency, a number we could not find published anywhere else.
+
+We also sell fixes for this: if a Wazuh rule stays silent on your own build, or your events fail with mapper_parsing_exception, we write and test the fix for your exact version, and you pay only after it runs on your cluster. https://vct.atkvn.com/#fix-pack
